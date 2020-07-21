@@ -28,7 +28,7 @@ for x in range(0, 9):
 kbd = Keyboard(usb_hid.devices)
 layout = KeyboardLayoutUS(kbd)
 
-## configure mouse for scroll function
+## configure mouse for scroll functio
 m = Mouse(usb_hid.devices)
 
 ## define buttons
