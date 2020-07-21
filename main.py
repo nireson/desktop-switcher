@@ -2,7 +2,8 @@
 #
 #
 #
-# Import the libraries
+#
+## Import the libraries
 import time
 import board
 import rotaryio
@@ -28,7 +29,7 @@ for x in range(0, 9):
 kbd = Keyboard(usb_hid.devices)
 layout = KeyboardLayoutUS(kbd)
 
-## configure mouse for scroll functio
+## configure mouse for scroll function
 m = Mouse(usb_hid.devices)
 
 ## define buttons
@@ -53,6 +54,7 @@ encoder = rotaryio.IncrementalEncoder(board.D8, board.D7)
 last_position = 0
 osChoice = 0
 
+## blink / debouncer
 def bD(x):
     for i in range(0, x):
         led.value = False
@@ -60,8 +62,9 @@ def bD(x):
         led.value = True
         time.sleep(0.05)
 
-# loop forever
+## loop 
 while True:
+    ## choose OS
     if not b1.value:
         bD(1)
         osChoice = 0
@@ -77,6 +80,7 @@ while True:
         
     position = encoder.position
 
+    ## mouse scroll when pressed
     if not encClick.value:
         if position < last_position:
             m.move(wheel=1)
@@ -86,6 +90,8 @@ while True:
             m.move(wheel=-1)
             bD(1)
             last_position = position
+            
+    ## main desktop switcher loop
     if osChoice == 0 and encClick.value:
         if position < last_position:
             kbd.send(Keycode.GUI, Keycode.CONTROL, Keycode.LEFT_ARROW)
