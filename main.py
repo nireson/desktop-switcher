@@ -80,7 +80,7 @@ while True:
         
     position = encoder.position
 
-    ## mouse scroll when pressed
+    ## mouse scroll
     if not encClick.value:
         if position < last_position:
             m.move(wheel=1)
@@ -91,7 +91,7 @@ while True:
             bD(1)
             last_position = position
             
-    ## main desktop switcher loop
+    ## switch desktops when pressed
     if osChoice == 0 and encClick.value:
         if position < last_position:
             kbd.send(Keycode.GUI, Keycode.CONTROL, Keycode.LEFT_ARROW)
